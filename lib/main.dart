@@ -8,13 +8,15 @@ void main() {
 class App extends StatelessWidget {
   const App({super.key});
 
+  final Color mainColor = Colors.greenAccent;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: mainColor,
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: mainColor,
           title: const Text('Jogue dados!'),
         ),
         body: const Center(
