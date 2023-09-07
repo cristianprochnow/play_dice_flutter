@@ -19,9 +19,7 @@ class App extends StatelessWidget {
           backgroundColor: mainColor,
           title: const Text('Jogue dados!'),
         ),
-        body: const Center(
-          child: Dices(),
-        ),
+        body: const Dices(),
       ),
     );
   }

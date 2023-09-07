@@ -1,53 +1,55 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:play_dice_flutter/widgets/dice.dart';
 
-class Dices extends StatelessWidget {
+class Dices extends StatefulWidget {
   const Dices({super.key});
 
-  final double paddingSize = 16;
+  @override
+  State<Dices> createState() => _DicesState();
+}
+
+class _DicesState extends State<Dices> {
+  int firstDiceIndex = 1;
+  int secondDiceIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Row(
         children: [
-          Expanded(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.all(paddingSize),
-              ),
-              onPressed: onPressedDiceLeft,
-              child: Image.asset(dicesAsset('dice1')),
-            ),
+          Dice(
+            position: firstDiceIndex,
+            callback: onPressedDice,
           ),
-          Expanded(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.all(paddingSize),
-              ),
-              onPressed: onPressedDiceRight,
-              child: Image.asset(dicesAsset('dice2')),
-            ),
-          ),
+          Dice(
+            position: secondDiceIndex,
+            callback: onPressedDice,
+          )
         ],
       ),
     );
   }
 
-  String dicesAsset(String fileName) {
-    return "assets/images/$fileName.png";
+  void onPressedDice() {
+    onPressedDiceLeft();
+    onPressedDiceRight();
   }
 
   void onPressedDiceLeft() {
-    onPressedDice();
+    setState(() {
+      firstDiceIndex = generateRandomNumber();
+    });
   }
 
   void onPressedDiceRight() {
-    onPressedDice();
+    setState(() {
+      secondDiceIndex = generateRandomNumber();
+    });
   }
 
-  void onPressedDice() {
-    log('Show de Bola Demais');
+  int generateRandomNumber() {
+    return Random().nextInt(6) + 1;
   }
 }
